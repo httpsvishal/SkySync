@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <form>
+                <input type="search" id="searchValue" placeholder="Search your city here" required>
+                <button><img src="./assets/search-icon.png" alt="SkySync logo" class="logo"></button>
+            </form>
+            <h1>SkySync</h1>
+        </nav>
+    </header>
+    <hr>
+    <main>
+        <div class="weather-details">
+            <div class="current-info">
+                <div class="location-info">
+                    <div>
+                        <p>Current Location</p>
+                        <h2 id="heading"> Roorkee</h2>
+                    </div>
+                    <img src="./assets/navigation.png" alt="navigation logo">
+                </div>
+                <div class="current-weather">
+                    <img src="./assets/card-backround.jpg" alt="" id="card-background">
+                    <div class="details">
+                        <div>
+                            <img src="./assets/weather-icon.png" alt="">
+                        <span id="temp"></span>
+                        </div>
+                        <div>
+                            <p id="day"></p>
+                            <p id="condition"></p>
+                        </div>
+                    </div>
+                </div>
+                <p id="description">Similar temperatures continuing with a chance of rain multiple days.</p>
+            </div>
+            <div class="highlights">
+                <h3>Today's Highlights</h3>
+                <div class="highlights-content">
+                    <div class="today-highlight">
+                        <h4>Precipitation</h4>
+                        <p id="precipitation">2%</p>
+                    </div>
+                    <div class="today-highlight">
+                        <h4>Humidity</h4>
+                        <p id="humidity">87%</p>
+                    </div>
+                    <div class="today-highlight">
+                        <h4>Wind</h4>
+                        <p id="wind">0 km/h</p>
+                    </div>
+                    <div class="today-highlight">
+                        <h4>Sunrise &amp; Sunset</h4>
+                        <p id="sunriseSunset">
+                             <img src="./assets/sunrise.png" alt="sunrise" class="sunicon" >
+                            <span id="sunrise">6:18 a.m. </span>
+                            <img src="./assets/sunset.png" alt="sunset" class="sunicon" >
+                            <span id="sunset">7:27 p.m.</span>
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <h4>Hourly temperature highlights for today.</h4>
+                <canvas id="hourlyChart" style="width:100%"></canvas>
+            </div>
+        </div>
+
+        <div class="other-details">
+            <h3>Humidity</h3>
+            <canvas id="humdityChart" style="width: 100%;" ></canvas>
+            <hr>
+            <h4>7 Days forecast</h4>
+        </div>
+
+    </main>
+    <script src="./app.js"></script>
+    
+</body>
+
+</html>
