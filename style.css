@@ -147,11 +147,12 @@ main{
         }
         h4{
             font-size: 28px;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         .oneday{
             display: flex;
-            margin-top: 20px;
+            justify-content: space-between;
+            margin-top: 40px;
             img{
                 height: 20px;
             }
@@ -159,15 +160,29 @@ main{
                 width: 45%;
                 display: flex;
                 justify-content: space-around;
-                padding: 10px 20px;
-                background-color: #9888f1fe ;
+                align-items: center;
+                background-color: #a090fcfe ;
                 border-radius: 8px;
+                font-size: 18px;
+                font-weight: 500;
             }
             .days-info{
-                padding: 10px 20px;
                 width: 45%;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
+                font-size: 16px;
+                p{
+                    text-align: right;
+                }
+                img{
+                    height: 22px;
+                }
+                .nextdays{
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: #a7a4a4;
+                }
             }
         }
     }
@@ -193,4 +208,14 @@ main{
             text-align: left;
         }
     }
+    header nav form input{
+        padding: 10px 0;
+    }
+    main{
+        padding: 0;
+    }
+    .other-details{
+        padding: 10px;
+    }
+    
 }

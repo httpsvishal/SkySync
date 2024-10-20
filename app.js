@@ -12,6 +12,8 @@ let daysMaxTemp = document.getElementsByClassName("maxTemp");
 let daysMinTemp = document.getElementsByClassName("minTemp");
 let nextDays = document.getElementsByClassName("nextdays");
 let nextDaysConditions = document.getElementsByClassName("daycondition");
+const form = document.querySelector("form");
+const search = document.querySelector("input");
 
 
 let convertTemp = (f => (f - 32) * 5 / 9)
@@ -39,18 +41,30 @@ let UserLongitude = null;
 let locationError = null;
 const apikey = "4BAT67QVMGGRXNKWWKAUVSTKT";
 
+let hourlyChart =null;
+let humidityChart=null;
+
 const showWeather = data => {
     console.log(data);
     desc.innerText = data.description;
     temp.innerText = `${Math.floor(convertTemp(data.currentConditions.temp))}°C`;
     condition.innerText = data.currentConditions.conditions;
     humidity.innerText = data.currentConditions.humidity;
-    precipitation.innerText = data.currentConditions.precip;
+    precipitation.innerText = data.currentConditions.precip ?? 0;
     wind.innerText = `${data.currentConditions.windspeed} Km/h`;
     let sunr = data.currentConditions.sunrise.split(':');
     sunrise.innerText = `${sunr[0]}:${sunr[1]} a.m.`;
     let suns = data.currentConditions.sunset.split(':');
     sunset.innerText = `${suns[0] % 12}:${suns[1]} p.m.`;
+
+    for(let i = 0 ; i < 7 ; i++){
+        daysMaxTemp[i].innerText = Math.floor(convertTemp(data.days[i+1].tempmax)) + "°C";
+        daysMinTemp[i].innerText = Math.floor(convertTemp(data.days[i+1].tempmin)) + "°C";
+        nextDays[i].innerText= daysOfWeek[(todaysDay+i)%7];
+        console.log(daysOfWeek[(todaysDay+i+1)%7]);
+        nextDaysConditions[i].innerText= data.days[i+1].conditions;
+    }
+
     const xValues = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM']
         ;
     const yValues = [];
@@ -66,9 +80,10 @@ const showWeather = data => {
         yhumidValues.push(hum);
     }
     let barColors = "#9888f1";
-
-    let hourlyChart = document.getElementById("hourlyChart").getContext('2d');
-    new Chart(hourlyChart, {
+    if(hourlyChart)
+    hourlyChart.destroy();
+    hourlyctx = document.getElementById("hourlyChart").getContext('2d');
+    hourlyChart =  new Chart(hourlyctx, {
         type: "line",
         data: {
             labels: xValues,
@@ -89,8 +104,10 @@ const showWeather = data => {
             }
         }
     });
-    let humidityChart = document.getElementById("humdityChart").getContext('2d');
-    new Chart(humidityChart, {
+    if(humidityChart)
+    humidityChart.destroy();
+    let humidityctx = document.getElementById("humdityChart").getContext('2d');
+    humidityChart = new Chart(humidityctx, {
         type: "bar",
         data: {
             labels: xhumidValues,
@@ -147,6 +164,19 @@ let getUserData = () => {
         locationError = "Your browser doesn't supports geolocation";
     }
 }
+
+const handleSearch = (e) =>{
+    e.preventDefault();
+    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${search.value}?key=${apikey}`)
+    .then((res) => res.json())
+    .then((data) =>{
+        heading.innerText=data.resolvedAddress;
+        showWeather(data);
+    })
+
+}
+
+form.addEventListener("submit",handleSearch);
 
 getUserData();
 
