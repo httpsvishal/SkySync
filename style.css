@@ -43,7 +43,7 @@ header{
             align-items: center;
             font-size: 48px;
             letter-spacing: 1px;
-            color: #7f69ff;
+            color: #9888f1fe;
         }
     }
 }
@@ -145,7 +145,33 @@ main{
             font-size: 28px;
             text-align: center;
         }
+        h4{
+            font-size: 28px;
+            margin-top: 20px;
+        }
+        .oneday{
+            display: flex;
+            margin-top: 20px;
+            img{
+                height: 20px;
+            }
+            .days-content{
+                width: 45%;
+                display: flex;
+                justify-content: space-around;
+                padding: 10px 20px;
+                background-color: #9888f1fe ;
+                border-radius: 8px;
+            }
+            .days-info{
+                padding: 10px 20px;
+                width: 45%;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
+
     
 }
 @media (max-width:960px) {
